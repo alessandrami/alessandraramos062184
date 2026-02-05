@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  pet-manager:
+    build: .
+    ports:
+      - "5174:5173"
+    environment:
+      - VITE_API_URL=https://pet-manager-api.geia.vip
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5173/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s

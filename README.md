@@ -20,7 +20,7 @@ O Amifa Pets é uma Single Page Application (SPA) desenvolvida com o objetivo de
 - Cadastrar, editar, excluir e visualizar pets
 - Cadastrar, editar, excluir e visualizar tutores
 - Vincular pets aos tutores
-- Fazer upload de imagens adicionais por pet
+- Fazer upload de imagens adicionais para pet e tutores
 - Fazer upload e visualização de documentos em PDF
 
 🏗️ **Arquitetura e Fluxo**
@@ -137,31 +137,16 @@ docker run -p 5174:5173 --name pet-manager pet-manager:latest
 ```bash
 docker-compose up -d
 ```
-
 ### Health Check do Container
 
-O healthcheck do container está configurado no `docker-compose.yml`. Se preferir incluir no Dockerfile, adicione o bloco abaixo:
-
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:5173/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
-```
-
-### Variáveis de Ambiente
-
-Configure via `.env`:
-
-```env
-VITE_API_URL=https://pet-manager-api.geia.vip
-VITE_APP_PORT=5173
-```
+O healthcheck do container está configurado no `docker-compose.yml`. O healthcheck já está implementado no Dockerfile:
 
 📝 **Observações Importantes**
 
 - API Oficial: O sistema usa exclusivamente a API oficial: `https://pet-manager-api.geia.vip/q/swagger-ui/`
 - ⚠️ Credenciais necessárias para acesso ao sistema admin/admin 
 - Node.js Obrigatório: Este projeto requer Node.js instalado. Verifique com `node --version` e instale em https://nodejs.org/ se necessário.
-- **Ambiente Recomendado**: Desenvolvido em **VS Code**. Baixe em https://code.visualstudio.com/
+- Ambiente Recomendado: Desenvolvido em **VS Code**. Baixe em https://code.visualstudio.com/
 
 ---
 Desenvolvido  — 2026
